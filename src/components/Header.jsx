@@ -16,11 +16,24 @@ const ProjectLogo = () => (
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // PinTool 導航連結
-  const navLinks = ["Features", "Roadmap", "Community"];
+  // 滾動到 Footer 的 Join Waitlist 區域
+  const scrollToWaitlist = () => {
+    const footerElement = document.querySelector('footer');
+    if (footerElement) {
+      footerElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      // 滾動完成後觸發事件顯示指示
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('scrollToWaitlist'));
+      }, 1000); // 等待滾動動畫完成
+    }
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md neobrut-border border-b-2">
+    <header className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b-2 border-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
@@ -29,13 +42,15 @@ const Header = () => {
               <span className="text-2xl font-bold text-white tracking-tighter">PinTool</span>
             </a>
             <nav className="hidden md:flex ml-10 space-x-8">
-              {navLinks.map(link => (
-                <a key={link} href="#" className="text-gray-300 hover:text-pink-400 transition-colors duration-200">{link}</a>
-              ))}
             </nav>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <JoinWaitlistButton variant="primary" />
+            <JoinWaitlistButton
+              variant="primary"
+              size="large"
+              showBorder={false}
+              onClick={scrollToWaitlist}
+            />
           </div>
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-gray-300 hover:text-white focus:outline-none">
@@ -49,13 +64,15 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden bg-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map(link => (
-              <a key={link} href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">{link}</a>
-            ))}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">
             <div className="flex items-center justify-center px-5">
-              <JoinWaitlistButton variant="primary" size="full" />
+              <JoinWaitlistButton
+                variant="primary"
+                size="full"
+                showBorder={false}
+                onClick={scrollToWaitlist}
+              />
             </div>
           </div>
         </div>
