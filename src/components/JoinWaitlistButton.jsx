@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { trackJoinWaitlist, trackWaitlistSubmit } from '../utils/analytics';
+import { waitlistService } from '../config/database';
 
 const JoinWaitlistButton = ({ 
   variant = 'primary',     // 'primary' | 'hero' | 'footer' | 'input'
@@ -13,6 +15,8 @@ const JoinWaitlistButton = ({
 }) => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   
   // 根據尺寸調整樣式
   const getSizeClasses = () => {
@@ -28,20 +32,48 @@ const JoinWaitlistButton = ({
   };
 
   // 處理輸入框提交
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onClick) {
-      onClick(email);
-    }
-    // 這裡可以添加實際的 waitlist 提交邏輯
-    console.log('Email submitted:', email);
-    setIsSubmitted(true);
+    setIsLoading(true);
+    setError('');
 
-    // 3秒後重置狀態，允許再次提交
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setEmail('');
-    }, 3000);
+    try {
+      // 提交到資料庫
+      const { success, error: apiError } = await waitlistService.addToWaitlist(email);
+
+      if (!success) {
+        if (apiError && apiError.includes('already exists')) {
+          setError('This email is already on the waitlist!');
+        } else {
+          setError('Something went wrong. Please try again.');
+        }
+        setIsLoading(false);
+        return;
+      }
+
+      // 追蹤 waitlist 提交事件
+      trackWaitlistSubmit(email);
+
+      if (onClick) {
+        onClick(email);
+      }
+
+      console.log('Email submitted successfully:', email);
+      setIsSubmitted(true);
+
+      // 3秒後重置狀態
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setEmail('');
+        setError('');
+      }, 3000);
+
+    } catch (err) {
+      console.error('Error submitting email:', err);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // 如果是輸入框變體，返回輸入框組合
@@ -57,19 +89,25 @@ const JoinWaitlistButton = ({
     }
 
     return (
-      <form onSubmit={handleSubmit} className={`input-wrapper ${className}`}>
-        <input
-          type="email"
-          className="input"
-          placeholder={placeholder}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit" className="Subscribe-btn">
-          Join
-        </button>
-      </form>
+      <div className={className}>
+        <form onSubmit={handleSubmit} className="input-wrapper">
+          <input
+            type="email"
+            className="input"
+            placeholder={placeholder}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
+            required
+          />
+          <button type="submit" className="Subscribe-btn" disabled={isLoading}>
+            {isLoading ? '...' : 'Join'}
+          </button>
+        </form>
+        {error && (
+          <p className="text-red-400 text-sm mt-2 text-center">{error}</p>
+        )}
+      </div>
     );
   }
 
@@ -83,8 +121,17 @@ const JoinWaitlistButton = ({
     <span className="text_button">{children}</span>
   );
 
+  const handleButtonClick = () => {
+    // 追蹤按鈕點擊事件
+    trackJoinWaitlist();
+
+    if (onClick && !disabled) {
+      onClick();
+    }
+  };
+
   const buttonContent = (
-    <div className={`${getSizeClasses()} ${className}`} onClick={disabled ? undefined : onClick}>
+    <div className={`${getSizeClasses()} ${className}`} onClick={disabled ? undefined : handleButtonClick}>
       {showBorder && !disabled && <DotsBorder />}
       <ButtonText>{children}</ButtonText>
     </div>

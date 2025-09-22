@@ -16,11 +16,11 @@ const ProjectLogo = () => (
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // 滾動到 Footer 的 Join Waitlist 區域
+  // 滾動到 Waitlist 區域
   const scrollToWaitlist = () => {
-    const footerElement = document.querySelector('footer');
-    if (footerElement) {
-      footerElement.scrollIntoView({
+    const waitlistElement = document.querySelector('#waitlist');
+    if (waitlistElement) {
+      waitlistElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });

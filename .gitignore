@@ -1,2 +1,4 @@
 .env
 node_modules
+grafana-setup/grafana-data/
+grafana-setup/volumes/

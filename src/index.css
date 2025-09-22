@@ -189,7 +189,7 @@
 }
 /* Modern 3D Button Styles */
 .button {
-  --button-bg: var(--oxford-blue);
+  --button-bg: #ffffff;
   --border_radius: 9999px;
   --transtion: 0.3s ease-in-out;
   --offset: 2px;
@@ -242,12 +242,12 @@
 
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--blue-crayola), var(--tropical-indigo), var(--sky-blue));
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #bae6fd);
   background-image: radial-gradient(at 51% 89%,
-      var(--blue-crayola) 0px,
+      #f0f9ff 0px,
       transparent 50%),
-    radial-gradient(at 100% 100%, var(--tropical-indigo) 0px, transparent 50%),
-    radial-gradient(at 22% 91%, var(--sky-blue) 0px, transparent 50%);
+    radial-gradient(at 100% 100%, #e0f2fe 0px, transparent 50%),
+      radial-gradient(at 22% 91%, #bae6fd 0px, transparent 50%);
   background-position: top;
 
   opacity: var(--active, 0);
@@ -266,7 +266,7 @@
 
 /* Disabled Button Styles - No border animation or hover effects */
 .button-disabled {
-  --button-bg: var(--oxford-blue);
+  --button-bg: #f3f4f6;
   --border_radius: 9999px;
   --transtion: 0.3s ease-in-out;
   --offset: 2px;
@@ -378,12 +378,12 @@
   z-index: 10;
 
   background-image: linear-gradient(90deg,
-      hsla(0 0% 100% / 1) 0%,
-      hsla(0 0% 100% / var(--active, 0.7)) 120%);
+      hsla(0 0% 0% / 0.9) 0%,
+        hsla(0 0% 0% / var(--active, 0.7)) 120%);
   background-clip: text;
 
   font-size: 1rem;
-  color: transparent;
+  color: #1f2937;
 }
 
 .button-disabled .text_button {
@@ -394,7 +394,7 @@
   background-clip: initial;
 
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(75, 85, 99, 0.8);
 }
 
 /* Glass Social Button Styles */

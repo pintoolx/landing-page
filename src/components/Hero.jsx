@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JoinWaitlistButton from './JoinWaitlistButton';
 import { ChartNoAxesCombined, Unlock, RefreshCw, DollarSign, Bell, Eye, Zap, CheckCircle, Pause } from 'lucide-react';
+import { trackStartDemo } from '../utils/analytics';
 
 // PinTool 工作流程步驟
 const workflowSteps = [
@@ -97,6 +98,9 @@ const Hero = () => {
   };
 
   const startDemo = () => {
+    // 追蹤 Start Demo 點擊事件
+    trackStartDemo();
+
     if (currentStep >= steps.length - 1) {
       resetDemo();
     }
@@ -122,8 +126,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative overflow-hidden text-white py-20 md:py-32" style={{ backgroundColor: '#041131' }}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#041131] via-[#041131]/80 to-[#041131]"></div>
+    <section className="relative text-white py-16 md:py-24" style={{ backgroundColor: '#041131' }}>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -134,7 +137,7 @@ const Hero = () => {
 
         {/* 互動式工作流程演示 */}
         <div className="mt-16 max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <div className="flex justify-center gap-4">
               <JoinWaitlistButton 
                 onClick={startDemo}
@@ -179,8 +182,8 @@ const Hero = () => {
 
                     {/* Arrow (except the last one) */}
                     {index < steps.length - 1 && (
-                      <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 z-20">
-                        <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute top-1/2 -right-[18px] transform -translate-y-1/2 z-20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                       </div>
@@ -238,11 +241,10 @@ const Hero = () => {
 
           {/* Result display */}
           {currentStep >= steps.length - 1 && !isPlaying && (
-            <div className="mt-12 workflow-completed-card text-center animate-bounce-in">
+            <div className="mt-8 workflow-completed-card text-center animate-bounce-in">
               <div className="workflow-completed-inner">
-                <h3 className="text-2xl font-bold text-white mb-4"> Workflow completed!</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  Successfully swapped SOL to USDC and deposited to Kamino Lend, and sent a completion notification.
+                <p className="font-bold text-white" style={{ fontSize: '12pt' }}>
+                  Workflow completed! Successfully swapped SOL to USDC and deposited to Kamino Lend.
                 </p>
               </div>
             </div>

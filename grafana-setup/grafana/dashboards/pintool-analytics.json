@@ -1,0 +1,119 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "PinTool Analytics Dashboard",
+    "tags": ["pintool", "analytics", "waitlist"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Total Waitlist Signups",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "SELECT COUNT(*) FROM waitlist",
+            "format": "table",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Daily Signups",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "SELECT DATE(created_at) as time, COUNT(*) as signups FROM waitlist GROUP BY DATE(created_at) ORDER BY time",
+            "format": "table",
+            "legendFormat": "Daily Signups",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Signups by Source",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "SELECT source, COUNT(*) FROM waitlist GROUP BY source",
+            "format": "table",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "Recent Signups",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "SELECT email, created_at, source FROM waitlist ORDER BY created_at DESC LIMIT 10",
+            "format": "table",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      }
+    ],
+    "time": {
+      "from": "now-30d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": "5s",
+    "schemaVersion": 27,
+    "version": 0,
+    "links": []
+  }
+}
