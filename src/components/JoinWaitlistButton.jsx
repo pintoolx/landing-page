@@ -4,13 +4,15 @@ import { waitlistService } from '../config/database';
 
 const JoinWaitlistButton = ({ 
   variant = 'primary',     // 'primary' | 'hero' | 'footer' | 'input'
-  size = 'default',        // 'default' | 'large' | 'full'
+  size = 'default',        // 'default' | 'large' | 'full' | 'sm' | 'lg'
+  design = undefined,      // 'pill' 使用 Tailwind 樣式的膠囊按鈕
+  track = true,            // 是否追蹤 join waitlist 事件
   className = '',          // 額外的 CSS 類別
   onClick,                 // 點擊事件處理
   href = '#',              // 連結目標
   children = 'Join Waitlist', // 按鈕文字（可自訂）
   placeholder = 'Enter your email', // 輸入框占位符
-  showBorder = true,       // 是否顯示旋轉邊框動畫
+  showBorder = true,       // 是否顯示旋轉邊框動畫（僅非 pill 設計）
   disabled = false         // 是否禁用按鈕（禁用時無邊框和 hover 效果）
 }) => {
   const [email, setEmail] = useState('');
@@ -18,8 +20,24 @@ const JoinWaitlistButton = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  // 根據尺寸調整樣式
-  const getSizeClasses = () => {
+  // 膠囊按鈕尺寸（Tailwind）
+  const getPillClasses = () => {
+    // Header 小按鈕（16px 字）與 Hero 大按鈕（24px 字）
+    switch (size) {
+      case 'lg':
+      case 'large':
+        return 'px-[16px] py-[4px] rounded-[48px] text-[24px]';
+      case 'full':
+        return 'w-full justify-center px-[16px] py-[8px] rounded-[48px] text-[16px]';
+      case 'sm':
+        return 'px-[16px] py-[4px] rounded-[48px] text-[16px]';
+      default:
+        return 'px-[16px] py-[4px] rounded-[48px] text-[16px]';
+    }
+  };
+
+  // 原本樣式（保留相容）
+  const getLegacySizeClasses = () => {
     const baseClasses = disabled ? 'button-disabled' : 'button';
     switch (size) {
       case 'large':
@@ -111,7 +129,7 @@ const JoinWaitlistButton = ({
     );
   }
 
-  // 旋轉邊框組件
+  // 旋轉邊框組件（僅舊設計使用）
   const DotsBorder = () => (
     <div className="dots_border"></div>
   );
@@ -122,8 +140,10 @@ const JoinWaitlistButton = ({
   );
 
   const handleButtonClick = () => {
-    // 追蹤按鈕點擊事件
-    trackJoinWaitlist();
+    // 追蹤按鈕點擊事件（可關閉）
+    if (track) {
+      trackJoinWaitlist();
+    }
 
     if (onClick && !disabled) {
       onClick();
@@ -131,10 +151,21 @@ const JoinWaitlistButton = ({
   };
 
   const buttonContent = (
-    <div className={`${getSizeClasses()} ${className}`} onClick={disabled ? undefined : handleButtonClick}>
-      {showBorder && !disabled && <DotsBorder />}
-      <ButtonText>{children}</ButtonText>
-    </div>
+    design === 'pill' ? (
+      <button
+        type="button"
+        className={`bg-[#2050f2] box-border content-stretch flex items-center justify-center ${getPillClasses()} relative shrink-0 ${className}`}
+        onClick={disabled ? undefined : handleButtonClick}
+        disabled={disabled}
+      >
+        <span className="font-['Space_Grotesk:SemiBold',_sans-serif] leading-[normal] not-italic text-[#e4eaf2] text-center whitespace-pre">{children}</span>
+      </button>
+    ) : (
+      <div className={`${getLegacySizeClasses()} ${className}`} onClick={disabled ? undefined : handleButtonClick}>
+        {showBorder && !disabled && <DotsBorder />}
+        <ButtonText>{children}</ButtonText>
+      </div>
+      )
   );
 
   // 如果沒有 onClick 但有 href，包裝在 a 標籤中

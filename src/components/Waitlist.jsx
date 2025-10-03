@@ -23,16 +23,16 @@ const Waitlist = () => {
   }, []);
 
   return (
-    <section id="waitlist" className="py-16" style={{ backgroundColor: '#041131' }}>
+    <section id="waitlist" className="py-16 bg-[#E4EAF2]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
           
           {/* Join Waitlist 區域 */}
           <div className="mb-8">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4 text-white">
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4 text-black">
               Join the Waitlist
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-black mb-8">
               Get early access when PinTool launches
             </p>
             

@@ -4,10 +4,14 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Waitlist from './components/Waitlist';
 import Footer from './components/Footer';
+import Background from './components/Background';
 
 function App() {
   return (
-    <div className="bg-gray-900 font-mono">
+    <div className="relative font-mono min-h-screen">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <Background />
+      </div>
       <Header />
       <main>
         <Hero />
