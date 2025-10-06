@@ -101,7 +101,7 @@ const JoinWaitlistButton = ({
       return (
         <div className={`input-wrapper ${className}`}>
           <div className="input flex items-center justify-center text-center">
-            <span className="text-cyan-400 font-medium">✓ Thanks! You're on the list</span>
+            <span className="text-black font-medium">✓ Thanks! You're on the list</span>
           </div>
         </div>
       );
