@@ -25,7 +25,7 @@ const Footer = () => {
             >
               <span className="sr-only">Follow us on X (Twitter)</span>
               <svg
-                className="w-6 h-6 fill-current"
+                className="icon-x w-6 h-6 fill-current"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >

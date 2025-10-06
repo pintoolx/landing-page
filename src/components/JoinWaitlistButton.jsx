@@ -8,6 +8,7 @@ const JoinWaitlistButton = ({
   design = undefined,      // 'pill' 使用 Tailwind 樣式的膠囊按鈕
   track = true,            // 是否追蹤 join waitlist 事件
   className = '',          // 額外的 CSS 類別
+  textClassName = '',      // 文字樣式覆蓋（顏色/字重/字體/字級）
   onClick,                 // 點擊事件處理
   href = '#',              // 連結目標
   children = 'Join Waitlist', // 按鈕文字（可自訂）
@@ -152,14 +153,22 @@ const JoinWaitlistButton = ({
 
   const buttonContent = (
     design === 'pill' ? (
-      <button
-        type="button"
-        className={`bg-[#2050f2] box-border content-stretch flex items-center justify-center ${getPillClasses()} relative shrink-0 ${className}`}
+      // 依照 UI 稿改為兩層 div 結構，保留 onClick 與可覆蓋樣式
+      <div
+        className={`px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center ${disabled ? 'opacity-60 pointer-events-none' : ''} ${className}`}
         onClick={disabled ? undefined : handleButtonClick}
-        disabled={disabled}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (disabled) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleButtonClick();
+          }
+        }}
       >
-        <span className="font-['Space_Grotesk:SemiBold',_sans-serif] leading-[normal] not-italic text-[#e4eaf2] text-center whitespace-pre">{children}</span>
-      </button>
+        <div className={`text-center justify-start text-slate-200 text-2xl font-semibold font-['Space_Grotesk'] ${textClassName}`}>{children}</div>
+      </div>
     ) : (
       <div className={`${getLegacySizeClasses()} ${className}`} onClick={disabled ? undefined : handleButtonClick}>
         {showBorder && !disabled && <DotsBorder />}

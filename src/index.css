@@ -638,16 +638,16 @@
   }
 }
 
-/* Waitlist Input Button Styles - From Uiverse.io by marcel_4026 */
 .input-wrapper {
-  height: 45px;
-  border-radius: 20px;
-  padding: 5px;
+  height: 64px;
+    width: 450px;
+    border-radius: 64px;
+    padding: 0;
   box-sizing: content-box;
   display: flex;
   align-items: center;
-  background-color: #292524;
-  width: 400px;
+  background-color: transparent;
+    border: 1px solid #404040;
 }
 
 .input {
@@ -655,41 +655,60 @@
   height: 100%;
   border: none;
   outline: none;
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: #292524;
-  color: white;
-  font-size: 1em;
+  padding-left: 24px;
+    padding-right: 0px;
+    background-color: transparent;
+    color: #0b0b0b;
+    font-size: 16px;
   min-width: 0;
+  color: var(--Neutral-500, #737373);
+    font-family: "Space Grotesk";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.32px;
 }
 
+.input::placeholder {
+  color: #737373;
+}
 .input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-text-fill-color: #0b0b0b;
+  }
+  
+  .input:-webkit-autofill:hover,
+  .input:-webkit-autofill:focus,
+  .input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: #0b0b0b;
+    transition: background-color 9999s ease-out 0s;
 }
 
 .Subscribe-btn {
-  height: 100%;
-  width: 95px;
-  min-width: 95px;
+  height: 60%;
+    min-width: 111px;
   border: none;
-  border-radius: 15px;
-  color: rgb(0, 0, 0);
+  border-radius: 48px;
+    color: #e4eaf2;
+    background-color: #2050f2;
   cursor: pointer;
-  background-color: #ffffff;
-  font-weight: 500;
-  overflow: hidden;
+  font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  transition: all 0.3s;
+  padding: 4px 16px;
+    transition: all 0.2s ease;
   flex-shrink: 0;
+  margin-right: 12px;
 }
 
 .Subscribe-btn:hover {
-  font-size: 77%;
-  transition: 300ms;
+  filter: brightness(0.95);
 }
 
 @keyframes jello-vertical {
@@ -726,7 +745,65 @@
   transform: scale(0.9);
 }
 
-/* Workflow Completed Card Styles - Inspired by Uiverse.io by Tiagoadag */
+/* Mobile-specific sizing for waitlist input */
+@media (max-width: 1024px) {
+
+  /* Outer wrapper: w-80 (320px), h-12 (48px), rounded-[48px], outline 1 with -1 offset */
+  .input-wrapper {
+    width: 320px;
+    height: 48px;
+    border-radius: 48px;
+    padding: 0;
+    background-color: transparent;
+    border: 1px solid #404040;
+    /* Neutral-700 */
+    outline: 1px solid #404040;
+    outline-offset: -1px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Inner input: pl-4 pr-2 (reserve right space for button), text-sm, Space Grotesk */
+  .input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    /* text-sm */
+    padding-left: 16px;
+    /* pl-4 */
+    padding-right: 0px;
+    /* reserve for button */
+    color: #0b0b0b;
+    height: 100%;
+  }
+
+  .input::placeholder {
+    color: #737373;
+    /* Neutral-500 */
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .input:-webkit-autofill,
+  .input:-webkit-autofill:hover,
+  .input:-webkit-autofill:focus,
+  .input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: #0b0b0b;
+    transition: background-color 9999s ease-out 0s;
+  }
+
+  /* Submit button smaller on mobile, rounded pill */
+  .Subscribe-btn {
+    height: 39px;
+    width: 111px;
+    min-width: 111px;
+    font-size: text-2xl;
+    border-radius: 48px;
+    padding: 0;
+    /* py-2 px-3 */
+  }
+}
 .workflow-completed-card {
   background-image: linear-gradient(163deg, #64cde3 0%, #5b80ed 100%);
   border-radius: 20px;
@@ -752,7 +829,6 @@
   box-shadow: 0px 0px 40px 2px rgba(100, 205, 227, 0.40);
 }
 
-/* Neumorphism Feature Cards - Inspired by Uiverse.io by adamgiebl */
 .feature-card-neumorphism {
   border-radius: 30px;
   background: #1f2937;
@@ -766,4 +842,26 @@
   transform: translateY(-5px);
   box-shadow: 20px 20px 40px #171f2b,
     -20px -20px 40px #273343;
+}
+/* X icon color behavior: mobile keep original; desktop hover can change */
+.icon-x {
+  color: #6B7280;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .icon-x:hover {
+    color: #ffffff;
+    /* 桌面 hover 變色 */
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  .icon-x,
+  .icon-x:active,
+  .icon-x:focus,
+  .icon-x:focus-visible {
+    color: #6B7280 !important;
+    /* 手機維持原色 */
+  }
 }
