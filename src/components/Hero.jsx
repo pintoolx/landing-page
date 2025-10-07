@@ -5,6 +5,8 @@ import Vector from '/images/Vector.svg';
 import ActiveBg from '/images/active.svg';
 import NotStartCard from '/images/notStartCard.svg';
 import solanaSolLogo from '/images/solana-sol-logo.svg';
+import Rectangle1 from '/images/Rectangle1.svg';
+import Rectangle2 from '/images/Rectangle2.svg';
 
 // PinTool 工作流程步驟
 const workflowSteps = [
@@ -227,6 +229,16 @@ const Hero = () => {
             <div className="relative w-[240px] mx-auto">
               {/* Carousel viewport */}
               <div className="w-[240px] h-[200px] mx-auto relative px-[20px]">
+                <img
+                  src={Rectangle1}
+                  alt=""
+                  className="pointer-events-none absolute top-0 left-[calc(50%-50vw)] h-full z-10"
+                />
+                <img
+                  src={Rectangle2}
+                  alt=""
+                  className="pointer-events-none absolute top-0 right-[calc(50%-50vw)] h-full z-10"
+                />
                 {/* Track */}
                 <div
                   className="flex items-center h-[200px]"
@@ -261,7 +273,7 @@ const Hero = () => {
                 type="button"
                 aria-label="Previous"
                 onClick={goPrev}
-                className="absolute left-[-36px] top-1/2 -translate-y-1/2 bg-transparent text-[#0E0F28] w-7 h-7 flex items-center justify-center disabled:hidden"
+                className="absolute left-[-56px] top-1/2 -translate-y-1/2 bg-transparent text-[#0E0F28] w-7 h-7 flex items-center justify-center disabled:hidden"
                 disabled={mobileIndex === 0}
               >
                 {/* lucide chevron-left */}
@@ -273,7 +285,7 @@ const Hero = () => {
                 type="button"
                 aria-label="Next"
                 onClick={goNext}
-                className="absolute right-[-36px] top-1/2 -translate-y-1/2 bg-transparent text-[#0E0F28] w-7 h-7 flex items-center justify-center disabled:hidden"
+                className="absolute right-[-55px] top-1/2 -translate-y-1/2 bg-transparent text-[#0E0F28] w-7 h-7 flex items-center justify-center disabled:hidden"
                 disabled={mobileIndex === maxIndex}
               >
                 {/* lucide chevron-right */}
