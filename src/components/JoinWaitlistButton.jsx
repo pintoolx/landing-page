@@ -5,25 +5,25 @@ import { waitlistService } from '../config/database';
 const JoinWaitlistButton = ({ 
   variant = 'primary',     // 'primary' | 'hero' | 'footer' | 'input'
   size = 'default',        // 'default' | 'large' | 'full' | 'sm' | 'lg'
-  design = undefined,      // 'pill' 使用 Tailwind 樣式的膠囊按鈕
-  track = true,            // 是否追蹤 join waitlist 事件
-  className = '',          // 額外的 CSS 類別
-  textClassName = '',      // 文字樣式覆蓋（顏色/字重/字體/字級）
-  onClick,                 // 點擊事件處理
-  href = '#',              // 連結目標
-  children = 'Join Waitlist', // 按鈕文字（可自訂）
-  placeholder = 'Enter your email', // 輸入框占位符
-  showBorder = true,       // 是否顯示旋轉邊框動畫（僅非 pill 設計）
-  disabled = false         // 是否禁用按鈕（禁用時無邊框和 hover 效果）
+  design = undefined,      // 'pill' use Tailwind style pill button
+  track = true,            // whether to track join waitlist event
+  className = '',          // additional CSS classes
+  textClassName = '',      // text style override (color/weight/font/size)
+  onClick,                 // click event handler
+  href = '#',              // link target
+  children = 'Join Waitlist', // button text (can be customized)
+  placeholder = 'Enter your email', // input placeholder
+  showBorder = true,       // whether to show rotating border animation (only for non-pill design)
+  disabled = false         // whether to disable button (when disabled, no border and hover effect)
 }) => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  // 膠囊按鈕尺寸（Tailwind）
+  // pill button size (Tailwind)
   const getPillClasses = () => {
-    // Header 小按鈕（16px 字）與 Hero 大按鈕（24px 字）
+    // Header small button (16px font) and Hero large button (24px font)
     switch (size) {
       case 'lg':
       case 'large':
@@ -37,7 +37,7 @@ const JoinWaitlistButton = ({
     }
   };
 
-  // 原本樣式（保留相容）
+  // original style (for compatibility)
   const getLegacySizeClasses = () => {
     const baseClasses = disabled ? 'button-disabled' : 'button';
     switch (size) {
@@ -50,14 +50,14 @@ const JoinWaitlistButton = ({
     }
   };
 
-  // 處理輸入框提交
+  // handle input submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
-      // 提交到資料庫
+      // submit to database
       const { success, error: apiError } = await waitlistService.addToWaitlist(email);
 
       if (!success) {
@@ -70,7 +70,7 @@ const JoinWaitlistButton = ({
         return;
       }
 
-      // 追蹤 waitlist 提交事件
+      // track waitlist submit event
       trackWaitlistSubmit(email);
 
       if (onClick) {
@@ -80,7 +80,7 @@ const JoinWaitlistButton = ({
       console.log('Email submitted successfully:', email);
       setIsSubmitted(true);
 
-      // 3秒後重置狀態
+      // 3 seconds later reset state
       setTimeout(() => {
         setIsSubmitted(false);
         setEmail('');
@@ -95,7 +95,7 @@ const JoinWaitlistButton = ({
     }
   };
 
-  // 如果是輸入框變體，返回輸入框組合
+  // if input variant, return input combination
   if (variant === 'input') {
     if (isSubmitted) {
       return (
@@ -130,18 +130,18 @@ const JoinWaitlistButton = ({
     );
   }
 
-  // 旋轉邊框組件（僅舊設計使用）
+  // rotating border component (only for old design)
   const DotsBorder = () => (
     <div className="dots_border"></div>
   );
 
-  // 文字組件
+  // text component
   const ButtonText = ({ children }) => (
     <span className="text_button">{children}</span>
   );
 
   const handleButtonClick = () => {
-    // 追蹤按鈕點擊事件（可關閉）
+    // track button click event (can be disabled)
     if (track) {
       trackJoinWaitlist();
     }
@@ -153,7 +153,7 @@ const JoinWaitlistButton = ({
 
   const buttonContent = (
     design === 'pill' ? (
-      // 依照 UI 稿改為兩層 div 結構，保留 onClick 與可覆蓋樣式
+      // according to UI code, use two divs structure, keep onClick and style override
       <div
         className={`px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center ${disabled ? 'opacity-60 pointer-events-none' : ''} ${className}`}
         onClick={disabled ? undefined : handleButtonClick}
@@ -177,7 +177,7 @@ const JoinWaitlistButton = ({
       )
   );
 
-  // 如果沒有 onClick 但有 href，包裝在 a 標籤中
+  // if there is no onClick but has href, wrap in a tag
   if (!onClick && href !== '#') {
     return (
       <a href={href} className="inline-block">

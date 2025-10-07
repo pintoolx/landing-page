@@ -8,7 +8,7 @@ import solanaSolLogo from '/images/solana-sol-logo.svg';
 import Rectangle1 from '/images/Rectangle1.svg';
 import Rectangle2 from '/images/Rectangle2.svg';
 
-// PinTool 工作流程步驟
+// PinTool workflow steps
 const workflowSteps = [
   {
     id: 1,
@@ -42,7 +42,7 @@ const workflowSteps = [
   }
 ];
 
-// CardStart 設計（可帶動態標題與描述）
+// CardStart design (can have dynamic title and description)  
 const CardStart = ({ title, description, status, started, stepId }) => {
   const isBlue = started && (status === 'active' || status === 'completed');
   const titleColor = isBlue ? 'text-white' : 'text-[#0e0f28]';
@@ -120,7 +120,7 @@ const Hero = () => {
           if (prev < steps.length - 1) {
             return prev + 1;
           } else {
-            // 確保最後一步也標記為完成
+            // ensure the last step is marked as completed
             setSteps(prevSteps =>
               prevSteps.map((step, index) => {
                 if (index <= prev) {
@@ -146,7 +146,7 @@ const Hero = () => {
   };
 
   const startDemo = () => {
-    // 追蹤 Start Demo 點擊事件
+    // track Start Demo click event
     trackStartDemo();
 
     if (currentStep >= steps.length - 1) {
@@ -173,11 +173,11 @@ const Hero = () => {
           </h1>
         </div>
 
-        {/* 互動式工作流程演示 */}
+        {/* interactive workflow demo */}
         <div className="mt-8 lg:mt-16 max-w-6xl mx-auto">
           <div className="text-center mb-6 lg:mb-10">
             <div className="flex justify-center gap-4">
-              {/* 手機顯示 Join Waitlist，桌面顯示 Start Demo */}
+              {/* mobile display Join Waitlist, desktop display Start Demo */}
               <div className="lg:hidden">
                 <JoinWaitlistButton
                   design="pill"
@@ -207,7 +207,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Desktop - horizontal layout */}
+          {/* desktop - horizontal layout */}
           <div className="hidden lg:block">
             <div className="relative">
               <div className="box-border content-stretch flex items-center justify-center pl-0 pr-[40px] py-0">
@@ -224,7 +224,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Mobile - horizontal overlapping carousel */}
+          {/* mobile - horizontal overlapping carousel */}
           <div className="lg:hidden">
             <div className="relative w-[240px] mx-auto">
               {/* Carousel viewport */}
@@ -296,7 +296,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Result display (desktop only) */}
+          {/* result display (desktop only) */}
           <div className="mt-8 hidden lg:flex items-center justify-center h-6">
             <div className={`w-full max-w-[600px] h-6 bg-slate-900 rounded-[64px] ${currentStep >= steps.length - 1 && !isPlaying ? 'visible' : 'invisible'
               }`}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Vector from '/images/Vector.svg';
-// PinTool 的三大核心功能
+// PinTool's three core features
 const features = [
   {
     title: "All-in-One Dashboard",
@@ -16,7 +16,7 @@ const features = [
   }
 ];
 
-// 新樣式：CardStart（維持動態標題與敘述）
+// new style: CardStart (keep dynamic title and description)
 const CardStart = ({ title, description }) => {
   return (
     <div className="relative size-full" data-name="Card/Start" data-node-id="12:529">

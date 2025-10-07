@@ -73,7 +73,7 @@
   animation: scroll 30s linear infinite;
 }
 
-/* 互動動畫效果 */
+/* Interactive animation effects */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -134,7 +134,7 @@
   animation: bounceIn 0.8s ease-out;
 }
 
-/* 懸浮效果 */
+/* hover effect */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -144,7 +144,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* 漸層文字效果 */
+/* gradient text effect */
 .gradient-text {
   background: linear-gradient(135deg, var(--sky-blue), var(--blue-crayola), var(--tropical-indigo));
   background-size: 200% 200%;
@@ -159,7 +159,7 @@
   50% { background-position: 100% 50%; }
 }
 
-/* 脈衝效果 */
+/* pulse effect */
 .pulse-ring {
   position: relative;
 }
@@ -843,7 +843,7 @@
   box-shadow: 20px 20px 40px #171f2b,
     -20px -20px 40px #273343;
 }
-/* X icon color behavior: mobile keep original; desktop hover can change */
+/* X icon color behavior: mobile keep original; desktop hover can change color */
 .icon-x {
   color: #6B7280;
 }
@@ -851,7 +851,7 @@
 @media (hover: hover) and (pointer: fine) {
   .icon-x:hover {
     color: #ffffff;
-    /* 桌面 hover 變色 */
+    /* desktop hover change color */
   }
 }
 
@@ -862,7 +862,7 @@
   .icon-x:focus,
   .icon-x:focus-visible {
     color: #6B7280 !important;
-    /* 手機維持原色 */
+    /* mobile keep original color */
   }
 }
 /* Desktop-only minimum page width: 1024px */
