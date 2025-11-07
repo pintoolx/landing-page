@@ -4,10 +4,10 @@ A modern landing page for Pintool - a Solana blockchain tool platform with integ
 
 ## Features
 
-- 🎯 **Waitlist System** - Email collection with duplicate detection
-- 📊 **Analytics Tracking** - User behavior tracking with localStorage and Supabase
-- ⚡ **Fast Performance** - Built with Vite and React 18
-- 🎨 **Responsive Design** - Works perfectly on all devices
+- **Waitlist System** - Email collection with duplicate detection
+- **Analytics Tracking** - User behavior tracking with localStorage and Supabase
+- **Fast Performance** - Built with Vite and React 18
+- **Responsive Design** - Works perfectly on all devices
 
 ## Tech Stack
 
