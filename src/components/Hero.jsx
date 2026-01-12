@@ -176,46 +176,58 @@ const Hero = () => {
         {/* interactive workflow demo */}
         <div className="mt-8 lg:mt-16 max-w-6xl mx-auto">
           <div className="text-center mb-6 lg:mb-10">
-            <div className="flex justify-center gap-4">
-              {/* mobile display Join Waitlist, desktop display Start Demo */}
-              <div className="lg:hidden">
-                <JoinWaitlistButton
-                  design="pill"
-                  size="sm"
-                  className="inline-flex bg-blue-600 px-4 py-1"
-                  textClassName="text-slate-200 text-base font-semibold font-['Space_Grotesk']"
-                  onClick={() => {
-                    const el = document.querySelector('#waitlist');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                  track={false}
-                >
-                  Join Waitlist
-                </JoinWaitlistButton>
-              </div>
-              <div className="hidden lg:flex lg:gap-4">
-                <JoinWaitlistButton
-                  design="pill"
-                  size="lg"
-                  onClick={startDemo}
-                  disabled={isPlaying}
-                  track={false}
-                >
-                  {isPlaying ? 'Executing...' : currentStep >= steps.length - 1 ? 'Restart' : 'Start Demo'}
-                </JoinWaitlistButton>
-                <a
-                  href="https://calendly.com/joe888777/amg-web3-yc-chen"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block"
-                >
-                  <div className="px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center cursor-pointer hover:bg-blue-700 transition-colors">
-                    <div className="text-center justify-start text-slate-200 text-2xl font-semibold font-['Space_Grotesk']">
-                      Schedule Call
-                    </div>
+            {/* mobile: two buttons centered */}
+            <div className="flex justify-center gap-3 lg:hidden">
+              <JoinWaitlistButton
+                design="pill"
+                size="sm"
+                className="inline-flex bg-blue-600 px-4 py-1"
+                textClassName="text-slate-200 text-base font-semibold font-['Space_Grotesk']"
+                onClick={() => {
+                  const el = document.querySelector('#waitlist');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                track={false}
+              >
+                Join Waitlist
+              </JoinWaitlistButton>
+              <a
+                href="https://calendly.com/joe888777/amg-web3-yc-chen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <div className="px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center cursor-pointer hover:bg-blue-700 transition-colors">
+                  <div className="text-center justify-start text-slate-200 text-base font-semibold font-['Space_Grotesk']">
+                    Schedule Call
                   </div>
-                </a>
-              </div>
+                </div>
+              </a>
+            </div>
+
+            {/* desktop: Start Demo + Schedule Call */}
+            <div className="hidden lg:flex lg:gap-4 lg:justify-center">
+              <JoinWaitlistButton
+                design="pill"
+                size="lg"
+                onClick={startDemo}
+                disabled={isPlaying}
+                track={false}
+              >
+                {isPlaying ? 'Executing...' : currentStep >= steps.length - 1 ? 'Restart' : 'Start Demo'}
+              </JoinWaitlistButton>
+              <a
+                href="https://calendly.com/joe888777/amg-web3-yc-chen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <div className="px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center cursor-pointer hover:bg-blue-700 transition-colors">
+                  <div className="text-center justify-start text-slate-200 text-2xl font-semibold font-['Space_Grotesk']">
+                    Schedule Call
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
 
