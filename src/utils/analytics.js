@@ -98,4 +98,12 @@ export const trackXLinkClick = () => {
   });
 };
 
+export const trackTelegramLinkClick = () => {
+  analytics.track('telegram_link_clicked', {
+    section: 'footer',
+    link_type: 'social',
+    platform: 'telegram'
+  });
+};
+
 export default analytics;

@@ -193,7 +193,7 @@ const Hero = () => {
                   Join Waitlist
                 </JoinWaitlistButton>
               </div>
-              <div className="hidden lg:block">
+              <div className="hidden lg:flex lg:gap-4">
                 <JoinWaitlistButton
                   design="pill"
                   size="lg"
@@ -203,6 +203,18 @@ const Hero = () => {
                 >
                   {isPlaying ? 'Executing...' : currentStep >= steps.length - 1 ? 'Restart' : 'Start Demo'}
                 </JoinWaitlistButton>
+                <a
+                  href="https://calendly.com/joe888777/amg-web3-yc-chen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <div className="px-4 py-1 bg-blue-600 rounded-[48px] inline-flex justify-center items-center cursor-pointer hover:bg-blue-700 transition-colors">
+                    <div className="text-center justify-start text-slate-200 text-2xl font-semibold font-['Space_Grotesk']">
+                      Schedule Call
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
