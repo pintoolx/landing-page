@@ -1,5 +1,9 @@
 # Pintool Landing Page
 
+> Archived product source: this first-generation landing page is retired and is
+> not deployed. The current `pintool.fun` source is
+> [pintoolx/landing-page-v2](https://github.com/pintoolx/landing-page-v2).
+
 A modern landing page for Pintool - a Solana blockchain tool platform with integrated analytics and waitlist management.
 
 ## Features
@@ -68,3 +72,13 @@ The application tracks key user interactions:
 All events are stored in:
 1. **LocalStorage** - Immediate tracking
 2. **Supabase** - Long-term storage and analysis
+
+## Deployment
+
+This repository is **not deployed**. It has no active production branch, hosting
+project or domain. `pintool.fun` and `www.pintool.fun` are deployed from
+`pintoolx/landing-page-v2` by Cloudflare Pages.
+
+The commands above are retained only for local historical reproduction. Do not
+add new deployment credentials or reconnect this repo to Cloudflare. Changes to
+the live marketing site belong in `landing-page-v2`.
